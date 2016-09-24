@@ -49,11 +49,11 @@ export default class YAxis extends Component<void, any, any> {
 		let label = minBound + (maxBound - minBound) / this.props.verticalGridStep * index;
 
 		if (!this.props.yAxisUseDecimal) {
-			label = Math.round(label);
+			label = Math.round(index);
 		}
 
 		if (this.props.yAxisTransform && typeof this.props.yAxisTransform === 'function') {
-			label = this.props.yAxisTransform(label);
+			label = this.props.yAxisTransform(index);
 		}
 		return (
 			<Text
@@ -72,7 +72,12 @@ export default class YAxis extends Component<void, any, any> {
 		const range = [];
 		const data = this.props.data || [];
 		const unique = uniqueValuesInDataSet(data);
-		const steps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
+		var steps = 1;
+		for( var i = 0; i < unique.length; i++ )
+		{
+			if( unique[i][1] > steps ) steps = unique[i][1];
+		}
+		// const steps = (unique.length < this.props.verticalGridStep) ? unique.length : this.props.verticalGridStep;
 		for (let i = steps; i >= 0; i--) range.push(i);
 		return (
 			<View

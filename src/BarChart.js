@@ -39,7 +39,7 @@ export default class BarChart extends Component<void, any, any> {
 
 		// For all same values, create a range anyway
 		if (minBound === maxBound) {
-			minBound -= this.props.verticalGridStep;
+			// minBound -= this.props.verticalGridStep;
 			maxBound += this.props.verticalGridStep;
 		}
 
@@ -48,7 +48,7 @@ export default class BarChart extends Component<void, any, any> {
 		const divisor = (maxBound - minBound <= 0) ? 0.00001 : (maxBound - minBound);
 		const scale = HEIGHT / divisor;
 		let height = HEIGHT - ((minBound * scale) + (HEIGHT - (dataPoint * scale)));
-		if (height <= 0) height = 20;
+		// if (height <= 0) height = 20;
 		return (
 			<TouchableWithoutFeedback
 				key={index}
